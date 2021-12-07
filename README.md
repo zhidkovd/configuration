@@ -10,4 +10,4 @@
 
 ### Настройка NTP, как сервера, так и клиента
 *:point_right: [ntp-server-client](ntp-server-client)*
-[Источник](https://www.dmosk.ru/miniinstruktions.php?mini=ntp-server-ubuntu)
+#### [Источник](https://www.dmosk.ru/miniinstruktions.php?mini=ntp-server-ubuntu)
