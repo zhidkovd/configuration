@@ -1,0 +1,32 @@
+### UBUNTU - DEBIAN ###
+
+===============================================
+apt -y update
+apt install -y cifs-utils
+===============================================
+# Создаем директорию для монтирования в неё общей папки:
+mkdir /mnt/myshare
+===============================================
+# Монтируем:
+mount -t cifs -o username=user,password=Passw0rd,domain=domain_name,dir_mode=0755,file_mode=0755 //WINDOWS_HOST_IP/share /mnt/myshare
+# WIN_HOST_IP — это IP адрес хоста Windows, на котором расположена общая папка
+# share — имя сетевого ресурса
+# user — наш пользователь и Passw0rd — пароль с которыми мы подключемся к шаре.
+===============================================
+### Автомонтирование:
+# Создаем файл с параметрами:
+vim /etc/cifs-credentials
+username = user
+password = Passw0rd
+domain = domain_name
+# Вписываем информацию для автомонтирования:
+vim /etc/fstab
+//WIN_HOST_IP/share /mnt/myshare cifs credentials=/etc/cifs-credentials,file_mode=0755,dir_mode=0755 0 0
+===============================================
+# Монтируем все точки записанные в /etc/fstab
+mount -a
+===============================================
+# Размонтирование, простое:
+umount /mnt/myshare
+# В нашем способе при помощи процесса cifs:
+umount -t cifs -l /mnt/myshare
