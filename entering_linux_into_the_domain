@@ -1,0 +1,48 @@
+### UBUNTU ###
+
+===============================================
+apt -y update
+sudo apt install -y krb5-user samba winbind
+===============================================
+# Изменить или добавить инфу в /etc/resolv.conf
+===============================================
+# Проверить доступность домена:
+realm discover example.com
+# Вывод:
+example.com
+type: kerberos
+realm-name: EXAMPLE.COM
+domain-name: example.com
+configured: no
+server-software: active-directory
+client-software: sssd
+required-package: sssd-tools
+required-package: sssd
+required-package: libnss-sss
+required-package: libpam-sss
+required-package: adcli
+required-package: samba-common-bin
+===============================================
+# Ввести сервер в домен:
+realm join -U Administrator example.com
+  Password for Administrator:
+===============================================
+# Просмотр текущих настроек:
+realm list
+# Вывод:
+example.com
+type: kerberos
+realm-name: EXAMPLE.COM
+domain-name: example.com
+configured: kerberos-member
+server-software: active-directory
+client-software: sssd
+required-package: sssd-tools
+required-package: sssd
+required-package: libnss-sss
+required-package: libpam-sss
+required-package: adcli
+required-package: samba-common-bin
+login-formats: %U@example.com
+login-policy: allow-realm-logins
+===============================================
